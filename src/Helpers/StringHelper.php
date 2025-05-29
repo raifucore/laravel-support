@@ -34,7 +34,7 @@ class StringHelper
         $array[] = config('app.key');
         $array[] = date('W');
 
-        return hash('sha512', implode('~!~^~#~&~', $array));
+        return hash('sha512', implode('~!~^~#~&~$~', $array));
     }
 
     public static function getPlural(int $count, string $one, string $few = null, string $many = null): string
