@@ -1,11 +1,11 @@
 <?php
 
-namespace RaifuCore\Support\Providers;
+namespace RaifuCore\Support;
 
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Str;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+class RaifuCoreServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot(): void
     {
@@ -18,10 +18,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     private function _loadLang(): void
     {
-        $langPath = __DIR__.'/../../resources/lang';
+        $langPath = __DIR__ . '/../resources/lang';
 
         // Load
-        $this->loadViewsFrom($langPath, 'raifucore');
+        $this->loadTranslationsFrom($langPath, 'raifucore');
 
         // Publish
         $this->publishes([
