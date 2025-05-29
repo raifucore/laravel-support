@@ -14,6 +14,7 @@ class RaifuCoreServiceProvider extends \Illuminate\Support\ServiceProvider
         Context::add('_rc_url', request()->url());
 
         $this->_loadLang();
+        $this->_loadViews();
     }
 
     private function _loadLang(): void
@@ -27,5 +28,18 @@ class RaifuCoreServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             $langPath => resource_path('lang/vendor/raifucore'),
         ], 'lang');
+    }
+
+    private function _loadViews(): void
+    {
+        $viewsPath = __DIR__ . '/../resources/views';
+
+        // Load
+        $this->loadViewsFrom($viewsPath, 'raifucore');
+
+        // Publish
+        $this->publishes([
+            $viewsPath => resource_path('views/vendor/raifucore'),
+        ], 'views');
     }
 }
