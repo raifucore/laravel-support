@@ -10,7 +10,7 @@ class PositiveNumber implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (floatval($value) <= 0) {
-            $fail(__('validation.positiveNumber'));
+            $fail(__('raifucore::validation.positiveNumber'));
         }
     }
 }

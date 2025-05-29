@@ -12,10 +12,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         Context::add('_rc_start_microtime', microtime(1));
         Context::add('_rc_trace_id', Str::uuid()->toString());
         Context::add('_rc_url', request()->url());
+
+        $this->_loadLang();
     }
 
-    public function register(): void
+    private function _loadLang(): void
     {
+        $langPath = __DIR__.'/../../resources/lang';
 
+        // Load
+        $this->loadViewsFrom($langPath, 'raifucore');
+
+        // Publish
+        $this->publishes([
+            $langPath => resource_path('lang/vendor/raifucore'),
+        ], 'lang');
     }
 }

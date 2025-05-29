@@ -18,7 +18,7 @@ class ArrayHash implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if ($value !== $this->arrayHash) {
-            $fail(__('validation.arrayHash'));
+            $fail(__('raifucore::validation.arrayHash'));
         }
     }
 }

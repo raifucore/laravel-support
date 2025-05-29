@@ -10,7 +10,7 @@ class NotNegativeNumber implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (floatval($value) < 0) {
-            $fail(__('validation.notNegativeNumber'));
+            $fail(__('raifucore::validation.notNegativeNumber'));
         }
     }
 }
