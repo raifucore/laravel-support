@@ -1,0 +1,41 @@
+{
+    "name": "raifucore/laravel-support",
+    "version": "1.0",
+    "description": "Support",
+    "keywords": [
+        "laravel",
+        "support"
+    ],
+    "authors": [
+        {
+            "name": "RaifuCore ライフ",
+            "email": "RaifuScripts@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "11.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RaifuCore\\Support\\Providers\\ServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "autoload": {
+        "files": [
+            "src/Helpers/Helper.php"
+        ],
+        "psr-4": {
+            "RaifuCore\\Support\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
