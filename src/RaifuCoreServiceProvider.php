@@ -4,9 +4,17 @@ namespace RaifuCore\Support;
 
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Str;
+use RaifuCore\Support\Services\Layout\Layout;
 
 class RaifuCoreServiceProvider extends \Illuminate\Support\ServiceProvider
 {
+    public function register(): void
+    {
+        $this->app->singleton(Layout::class, static function () {
+            return new Layout;
+        });
+    }
+
     public function boot(): void
     {
         Context::add('_rc_start_microtime', microtime(1));
