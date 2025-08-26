@@ -32,7 +32,6 @@ class StringHelper
     public static function arrayHash(array $array): string
     {
         $array[] = config('app.key');
-        $array[] = date('W');
 
         return hash('sha512', implode('~!~^~#~&~$~', $array));
     }
