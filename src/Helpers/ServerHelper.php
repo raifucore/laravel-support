@@ -22,6 +22,10 @@ class ServerHelper
             $ip = self::isValidIp($servItem) ? $servItem : null;
         }
 
+        if (! $ip && $requestIp = request()->ip()) {
+            $ip = self::isValidIp($requestIp) ? $requestIp : null;
+        }
+
         return $ip ?? '';
     }
 
