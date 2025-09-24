@@ -42,8 +42,27 @@ class Menu
         return $this;
     }
 
-    public function setCurrentItem(string|array $currentItemLabel, bool $erase = false): self
+    public function setCurrentItem(string|array $itemLabel, bool $erase = false): self
     {
+        $labels = is_array($itemLabel) ? $itemLabel : [$itemLabel];
+
+        $apply = function (Collection $items) use (&$apply, $labels, $erase): void {
+            foreach ($items as $item) {
+                $isMatch = in_array($item->getLabel(), $labels, true);
+                if ($isMatch) {
+                    $item->setIsCurrent(true);
+                } elseif ($erase) {
+                    $item->setIsCurrent(false);
+                }
+
+                $children = $item->getItems();
+                if ($children instanceof Collection && $children->isNotEmpty()) {
+                    $apply($children);
+                }
+            }
+        };
+
+        $apply($this->items);
 
         return $this;
     }
