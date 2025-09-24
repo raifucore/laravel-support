@@ -6,6 +6,7 @@ class Layout
 {
     protected static Page|null $page = null;
     protected static Meta|null $meta = null;
+    protected static Menu|null $menu = null;
     protected static Assets|null $assets = null;
     protected static Messages|null $messages = null;
     protected static Breadcrumbs|null $breadcrumbs = null;
@@ -26,6 +27,15 @@ class Layout
         }
 
         return self::$meta;
+    }
+
+    public static function menu(): Menu
+    {
+        if (is_null(self::$menu)) {
+            self::$menu = new Menu();
+        }
+
+        return self::$menu;
     }
 
     public static function assets(): Assets
