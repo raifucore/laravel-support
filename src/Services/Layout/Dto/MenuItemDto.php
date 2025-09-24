@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 
 class MenuItemDto
 {
+    protected string|null $name = null;
     protected string|null $href = null;
     protected string|null $target = null;
     protected string|null $icon = null;
@@ -13,16 +14,18 @@ class MenuItemDto
     protected bool $isCurrent = false;
     protected bool $isAvailable = true;
     protected MenuItemBadgeDto|null $badge = null;
-    protected Collection $items;
+    protected Collection|null $items = null;
 
-    public function __construct(protected string $label)
-    {
-        $this->items = collect();
-    }
+    public function __construct(protected string $label) {}
 
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
     public function getHref(): ?string
@@ -66,6 +69,13 @@ class MenuItemDto
     public function getItems(): Collection
     {
         return $this->items;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function setHref(?string $href): self
@@ -119,6 +129,10 @@ class MenuItemDto
 
     public function addItem(MenuItemDto $item): self
     {
+        if (is_null($this->items)) {
+            $this->items = collect();
+        }
+
         $this->items->add($item);
 
         return $this;
