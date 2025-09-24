@@ -2,6 +2,7 @@
 
 namespace RaifuCore\Support\Services\Layout\Dto;
 
+use Closure;
 use Illuminate\Support\Collection;
 
 class MenuItemDto
@@ -12,7 +13,7 @@ class MenuItemDto
     protected string|null $icon = null;
     protected string|null $class = null;
     protected bool $isCurrent = false;
-    protected bool $isAvailable = true;
+    protected bool|Closure $isAvailableCondition = true;
     protected MenuItemBadgeDto|null $badge = null;
     protected Collection|null $items = null;
 
@@ -55,7 +56,10 @@ class MenuItemDto
 
     public function isAvailable(): bool
     {
-        return $this->isAvailable;
+        $condition = $this->isAvailableCondition;
+        return $condition instanceof Closure
+            ? $condition()
+            : $condition;
     }
 
     public function getBadge(): ?MenuItemBadgeDto
@@ -64,9 +68,9 @@ class MenuItemDto
     }
 
     /**
-     * @return Collection<MenuItemDto>
+     * @return Collection<MenuItemDto>|null
      */
-    public function getItems(): Collection
+    public function getItems(): Collection|null
     {
         return $this->items;
     }
@@ -113,9 +117,9 @@ class MenuItemDto
         return $this;
     }
 
-    public function setIsAvailable(bool $isAvailable): self
+    public function setIsAvailable(bool|Closure $isAvailableCondition): self
     {
-        $this->isAvailable = $isAvailable;
+        $this->isAvailableCondition = $isAvailableCondition;
 
         return $this;
     }

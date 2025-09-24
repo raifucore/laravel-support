@@ -8,11 +8,9 @@ use Illuminate\Support\Collection;
 class Menu
 {
     protected bool $isCollapsed = false;
-    protected string|null $currentModule = null;
-    protected string|null $currentItem = null;
     protected Collection $items;
 
-    public function __construct()
+    public function __construct(protected string $label)
     {
         $this->items = collect();
     }
@@ -20,16 +18,6 @@ class Menu
     public function isCollapsed(): bool
     {
         return $this->isCollapsed;
-    }
-
-    public function getCurrentModule(): ?string
-    {
-        return $this->currentModule;
-    }
-
-    public function getCurrentItem(): ?string
-    {
-        return $this->currentItem;
     }
 
     /**
@@ -47,23 +35,15 @@ class Menu
         return $this;
     }
 
-    public function setCurrentModule(?string $currentModule): self
-    {
-        $this->currentModule = $currentModule;
-
-        return $this;
-    }
-
-    public function setCurrentItem(?string $currentItem): self
-    {
-        $this->currentItem = $currentItem;
-
-        return $this;
-    }
-
     public function addItem(MenuItemDto $item): self
     {
         $this->items->add($item);
+
+        return $this;
+    }
+
+    public function setCurrentItem(string|array $currentItemLabel, bool $erase = false): self
+    {
 
         return $this;
     }

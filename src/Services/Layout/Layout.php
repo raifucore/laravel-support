@@ -6,10 +6,10 @@ class Layout
 {
     protected static Page|null $page = null;
     protected static Meta|null $meta = null;
-    protected static Menu|null $menu = null;
     protected static Assets|null $assets = null;
     protected static Messages|null $messages = null;
     protected static Breadcrumbs|null $breadcrumbs = null;
+    protected static array $menu = [];
 
     public static function page(): Page
     {
@@ -27,15 +27,6 @@ class Layout
         }
 
         return self::$meta;
-    }
-
-    public static function menu(): Menu
-    {
-        if (is_null(self::$menu)) {
-            self::$menu = new Menu();
-        }
-
-        return self::$menu;
     }
 
     public static function assets(): Assets
@@ -63,5 +54,14 @@ class Layout
         }
 
         return self::$breadcrumbs;
+    }
+
+    public static function menu(string $label = 'default'): Menu
+    {
+        if (!isset(self::$menu[$label])) {
+            self::$menu[$label] = new Menu($label);
+        }
+
+        return self::$menu[$label];
     }
 }
