@@ -537,4 +537,19 @@ class FileHelper
 
         return is_array($extension) ? $extension[0] : $extension;
     }
+
+    /**
+     * Get the file size in human-readable format
+     */
+    public static function getFormattedFileSize(int $fileSizeInBytes): string
+    {
+        $bytes = $fileSizeInBytes;
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+        for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
+            $bytes /= 1024;
+        }
+
+        return round($bytes, 2) . ' ' . $units[$i];
+    }
 }
