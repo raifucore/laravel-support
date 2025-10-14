@@ -540,7 +540,9 @@ class FileHelper
 
     public static function getExtensionsByMimeType(string $mimeType): array
     {
-        return self::$mimeTypes[$mimeType] ?? [];
+        return isset(self::$mimeTypes[$mimeType]) ?
+            (is_string(self::$mimeTypes[$mimeType]) ? [self::$mimeTypes[$mimeType]] : self::$mimeTypes[$mimeType])
+            : [];
     }
 
     /**
