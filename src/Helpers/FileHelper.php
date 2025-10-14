@@ -538,6 +538,11 @@ class FileHelper
         return is_array($extension) ? $extension[0] : $extension;
     }
 
+    public static function getExtensionsByMimeType(string $mimeType): array
+    {
+        return self::$mimeTypes[$mimeType] ?? [];
+    }
+
     /**
      * Get the file size in human-readable format
      */
