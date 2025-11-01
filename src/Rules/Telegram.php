@@ -9,7 +9,7 @@ class Telegram implements ValidationRule
 {
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!preg_match('^[a-zA-Z][a-zA-Z0-9_]{4,31}$', $value)) {
+        if (!preg_match('/^[a-z][a-z0-9_]{4,31}$/i', $value)) {
             $fail(__('raifucore::validation.telegram'));
         }
     }
