@@ -18,4 +18,10 @@ trait EnumTrait
     {
         return array_combine(self::names(), self::values());
     }
+
+    public static function random(): self
+    {
+        $cases = self::cases();
+        return $cases[array_rand($cases)];
+    }
 }
