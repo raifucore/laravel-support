@@ -73,13 +73,19 @@ trait ModelDifferenceTrait
      */
     public function attributesToBeLogged(): array
     {
-        $options = $this->getModelDifferenceOptions();
+        $defaultExceptAttributes = $this->getModelDifferenceOptions()->logExceptAttributes;
+
+        $modelExceptAttributes = property_exists($this, 'logExceptAttributes')
+            ? $this->logExceptAttributes
+            : [];
+
+        $exceptAttributes = array_merge($defaultExceptAttributes, $modelExceptAttributes);
 
         $attributes = array_keys($this->getAttributes());
-        if ($options->logExceptAttributes) {
+        if ($exceptAttributes) {
 
             // Filter out the attributes defined in ignoredAttributes out of the local array
-            $attributes = array_diff($attributes, $options->logExceptAttributes);
+            $attributes = array_diff($attributes, $exceptAttributes);
         }
 
         return $attributes;
