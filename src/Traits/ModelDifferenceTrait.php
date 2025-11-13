@@ -185,9 +185,9 @@ trait ModelDifferenceTrait
 
                 if (function_exists('enum_exists') && enum_exists($cast)) {
                     if (method_exists($model, 'getStorableEnumValue')) {
-                        $changes[$attribute] = $model->getStorableEnumValue($changes[$attribute]);
+                        $changes[$attribute] = $model->getStorableEnumValue($cast, $changes[$attribute]);
                     } else {
-                        // ToDo: DEPRECATED - only here for Laravel 8 support
+                        // DEPRECATED - only here for Laravel 8 support
                         $changes[$attribute] = $changes[$attribute] instanceof \BackedEnum
                             ? $changes[$attribute]->value
                             : $changes[$attribute]->name;
