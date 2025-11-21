@@ -10,7 +10,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Context;
-use RaifuCore\Support\Helpers\ServerHelper;
 use RaifuCore\Support\Models\ModelField;
 
 abstract class BaseEvent
@@ -30,7 +29,7 @@ abstract class BaseEvent
     public function __construct()
     {
         $this->traceId = Context::get('_rc_trace_id');
-        $this->ip = ServerHelper::realIP();
+        $this->ip = request()->ip();
         $this->author = auth()->user();
         $this->dateTime = now();
     }
