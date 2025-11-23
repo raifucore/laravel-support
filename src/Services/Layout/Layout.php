@@ -9,6 +9,7 @@ class Layout
     protected static Assets|null $assets = null;
     protected static Messages|null $messages = null;
     protected static Breadcrumbs|null $breadcrumbs = null;
+    protected static Counter|null $counter = null;
     protected static array $menu = [];
 
     public static function page(): Page
@@ -54,6 +55,15 @@ class Layout
         }
 
         return self::$breadcrumbs;
+    }
+
+    public static function counter(): Counter
+    {
+        if (is_null(self::$counter)) {
+            self::$counter = new Counter();
+        }
+
+        return self::$counter;
     }
 
     public static function menu(string $label = 'default'): Menu
