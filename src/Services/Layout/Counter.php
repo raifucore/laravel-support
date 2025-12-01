@@ -2,13 +2,14 @@
 
 namespace RaifuCore\Support\Services\Layout;
 
+use Closure;
 use Illuminate\Support\Arr;
 
 class Counter
 {
     private static array $data = [];
 
-    public function set(string $label, int $value): self
+    public function set(string $label, int|Closure $value): self
     {
         $existing = Arr::get(self::$data, $label);
 
@@ -36,7 +37,9 @@ class Counter
             return self::sum($value);
         }
 
-        return $value;
+        return $value instanceof Closure
+            ? $value()
+            : $value;
     }
 
     public function total(): int
@@ -60,7 +63,9 @@ class Counter
             if (is_array($v)) {
                 $total += self::sum($v);
             } else {
-                $total += $v;
+                $total += $v instanceof Closure
+                    ? $v()
+                    : $v;
             }
         }
 
