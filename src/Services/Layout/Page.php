@@ -5,13 +5,10 @@ namespace RaifuCore\Support\Services\Layout;
 class Page
 {
     protected string|null $title = null;
-
     protected string|null $header = null;
-
     protected string|null $keywords = null;
-
     protected string|null $description = null;
-
+    protected string|null $canonical = null;
     protected bool $noIndex = false;
 
     public function getTitle(): string|null
@@ -32,6 +29,11 @@ class Page
     public function getDescription(): string|null
     {
         return $this->description;
+    }
+
+    public function getCanonical(): string|null
+    {
+        return $this->canonical;
     }
 
     public function isNoIndex(): bool
@@ -60,6 +62,12 @@ class Page
     public function setDescription(string|null $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function setCanonical(string|null $canonical): self
+    {
+        $this->canonical = $canonical;
         return $this;
     }
 
