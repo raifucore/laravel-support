@@ -162,6 +162,6 @@ class MenuItemDto
                 ->toArray();
         }
 
-        return $data;
+        return array_filter($data, fn($v) => $v !== null);
     }
 }
