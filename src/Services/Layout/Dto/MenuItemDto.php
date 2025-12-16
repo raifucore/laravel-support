@@ -17,7 +17,9 @@ class MenuItemDto
     protected MenuItemBadgeDto|null $badge = null;
     protected Collection|null $items = null;
 
-    public function __construct(protected string $label) {}
+    public function __construct(protected string $label)
+    {
+    }
 
     public function getLabel(): string
     {
@@ -133,12 +135,33 @@ class MenuItemDto
 
     public function addItem(MenuItemDto $item): self
     {
-        if (is_null($this->items)) {
-            $this->items = collect();
-        }
-
+        $this->items ??= collect();
         $this->items->add($item);
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        $data = [
+            'label' => $this->label,
+            'name' => $this->name,
+            'href' => $this->href,
+            'target' => $this->target,
+            'icon' => $this->icon,
+            'class' => $this->class,
+            'isCurrent' => $this->isCurrent,
+            'badge' => $this->badge?->toArray(),
+        ];
+
+        if ($this->items?->isNotEmpty()) {
+            $data['children'] = $this->items
+                ->filter(fn(self $item) => $item->isAvailable())
+                ->map(fn(self $item) => $item->toArray())
+                ->values()
+                ->toArray();
+        }
+
+        return $data;
     }
 }

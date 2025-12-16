@@ -66,4 +66,18 @@ class Menu
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return $this->items
+            ->filter(fn (MenuItemDto $item) => $item->isAvailable())
+            ->map(fn (MenuItemDto $item) => $item->toArray())
+            ->values()
+            ->toArray();
+    }
+
+    public function toJson(int $flags = JSON_UNESCAPED_UNICODE): string
+    {
+        return json_encode($this->toArray(), $flags);
+    }
 }

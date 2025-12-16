@@ -30,4 +30,12 @@ class MenuItemBadgeDto
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'count' => $this->count,
+            'class' => $this->class,
+        ];
+    }
 }
