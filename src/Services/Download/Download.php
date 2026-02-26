@@ -60,7 +60,7 @@ class Download
             $response->deleteFileAfterSend();
         }
 
-        return $response->send();
+        return $response;
     }
 
     /**
