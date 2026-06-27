@@ -19,7 +19,7 @@ class Pagination
 
     protected string $view = 'raifucore::pagination';
 
-    public function __construct(FilterDto $filter = null)
+    public function __construct(?FilterDto $filter = null)
     {
         if ($filter) {
             $this->initFromFilter($filter);
@@ -45,7 +45,7 @@ class Pagination
     /**
      * Generates an array of navigation elements and returns the result of the template rendering.
      */
-    public function getHTML(): string|null
+    public function getHTML(): ?string
     {
         $get = filter_input_array(INPUT_GET) ?: [];
 
@@ -173,7 +173,7 @@ class Pagination
     /**
      * Returns a string of GET parameters. If $page is passed, this array element is added/updated.
      */
-    private function _buildGetQuery(array $get = [], int $page = null): string
+    private function _buildGetQuery(array $get = [], ?int $page = null): string
     {
         if (!is_null($page)) {
             $get['page'] = $page;

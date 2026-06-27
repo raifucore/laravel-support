@@ -5,10 +5,11 @@ namespace RaifuCore\Support\Services\Download;
 class DownloadRequestDto
 {
     public function __construct(
-        protected string      $path,
-        protected string|null $name = null,
-        protected bool        $deleteAfterDownload = false,
-    ) {}
+        protected string  $path,
+        protected ?string $name = null,
+        protected bool    $deleteAfterDownload = false,
+    )
+    {}
 
     public function getPath(): string
     {

@@ -4,34 +4,34 @@ namespace RaifuCore\Support\Services\Layout;
 
 class Page
 {
-    protected string|null $title = null;
-    protected string|null $header = null;
-    protected string|null $keywords = null;
-    protected string|null $description = null;
-    protected string|null $canonical = null;
+    protected ?string $title = null;
+    protected ?string $header = null;
+    protected ?string $keywords = null;
+    protected ?string $description = null;
+    protected ?string $canonical = null;
     protected bool $noIndex = false;
 
-    public function getTitle(): string|null
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function getHeader(): string|null
+    public function getHeader(): ?string
     {
         return $this->header;
     }
 
-    public function getKeywords(): string|null
+    public function getKeywords(): ?string
     {
         return $this->keywords;
     }
 
-    public function getDescription(): string|null
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function getCanonical(): string|null
+    public function getCanonical(): ?string
     {
         return $this->canonical;
     }
@@ -41,31 +41,31 @@ class Page
         return $this->noIndex;
     }
 
-    public function setTitle(string|null $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-    public function setHeader(string|null $header): self
+    public function setHeader(?string $header): self
     {
         $this->header = $header;
         return $this;
     }
 
-    public function setKeywords(string|null $keywords): self
+    public function setKeywords(?string $keywords): self
     {
         $this->keywords = $keywords;
         return $this;
     }
 
-    public function setDescription(string|null $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
-    public function setCanonical(string|null $canonical): self
+    public function setCanonical(?string $canonical): self
     {
         $this->canonical = $canonical;
         return $this;

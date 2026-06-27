@@ -6,7 +6,7 @@ class BreadcrumbDto
 {
     public function __construct(
         protected string $label,
-        protected string|null $url = null,
+        protected ?string $url = null,
         protected bool|null $isHome = false
     ) {}
 
@@ -15,7 +15,7 @@ class BreadcrumbDto
         return $this->label;
     }
 
-    public function getUrl(): string|null
+    public function getUrl(): ?string
     {
         return $this->url;
     }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RequestHelper
 {
-    public static function isBot(Request $request = null): bool
+    public static function isBot(?Request $request = null): bool
     {
         $userAgent = $request
             ? $request->userAgent()

@@ -2,7 +2,9 @@
 
 namespace RaifuCore\Support\Listeners;
 
-abstract class BaseListener
+use RaifuCore\Support\Contracts\ListenerInterface;
+
+abstract class BaseListener implements ListenerInterface
 {
     public string $queue = 'listeners';
 }

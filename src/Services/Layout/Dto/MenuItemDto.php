@@ -7,11 +7,11 @@ use Illuminate\Support\Collection;
 
 class MenuItemDto
 {
-    protected string|null $name = null;
-    protected string|null $href = null;
-    protected string|null $target = null;
-    protected string|null $icon = null;
-    protected string|null $class = null;
+    protected ?string $name = null;
+    protected ?string $href = null;
+    protected ?string $target = null;
+    protected ?string $icon = null;
+    protected ?string $class = null;
     protected bool $isCurrent = false;
     protected bool|Closure $isAvailableCondition = true;
     protected MenuItemBadgeDto|null $badge = null;

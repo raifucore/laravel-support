@@ -8,7 +8,7 @@ class SessionHelper
 {
     private static string $flashKey = '_rc_session_flash_';
 
-    public static function get(string|null $item = null): mixed
+    public static function get(?string $item = null): mixed
     {
         $data = session()->all();
 

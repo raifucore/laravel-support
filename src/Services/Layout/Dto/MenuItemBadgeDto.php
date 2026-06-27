@@ -4,8 +4,8 @@ namespace RaifuCore\Support\Services\Layout\Dto;
 
 class MenuItemBadgeDto
 {
-    protected int|null $count = null;
-    protected string|null $class = null;
+    protected ?int $count = null;
+    protected ?string $class = null;
 
     public function getCount(): ?int
     {

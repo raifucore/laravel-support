@@ -4,12 +4,12 @@ namespace RaifuCore\Support\Services\Layout;
 
 class Layout
 {
-    protected static Page|null $page = null;
-    protected static Meta|null $meta = null;
-    protected static Assets|null $assets = null;
-    protected static Messages|null $messages = null;
-    protected static Breadcrumbs|null $breadcrumbs = null;
-    protected static Counter|null $counter = null;
+    protected static ?Page $page = null;
+    protected static ?Meta $meta = null;
+    protected static ?Assets $assets = null;
+    protected static ?Messages $messages = null;
+    protected static ?Breadcrumbs $breadcrumbs = null;
+    protected static ?Counter $counter = null;
     protected static array $menu = [];
 
     public static function page(): Page

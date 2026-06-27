@@ -10,9 +10,9 @@ class MessageDto
         protected string $message,
         protected MessageLevelEnum $level = MessageLevelEnum::INFO,
         protected bool $isDismissible = false,
-        protected string|null $buttonText = null,
-        protected string|null $buttonLink = null,
-        protected string|null $buttonOnclick = null,
+        protected ?string $buttonText = null,
+        protected ?string $buttonLink = null,
+        protected ?string $buttonOnclick = null,
     ) {}
 
     public function getMessage(): string
@@ -30,17 +30,17 @@ class MessageDto
         return $this->isDismissible;
     }
 
-    public function getButtonText(): string|null
+    public function getButtonText(): ?string
     {
         return $this->buttonText;
     }
 
-    public function getButtonLink(): string|null
+    public function getButtonLink(): ?string
     {
         return $this->buttonLink;
     }
 
-    public function getButtonOnclick(): string|null
+    public function getButtonOnclick(): ?string
     {
         return $this->buttonOnclick;
     }

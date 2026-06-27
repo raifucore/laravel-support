@@ -35,7 +35,7 @@ trait AjaxTrait
             ->header('Content-Type', 'application/json');
     }
 
-    protected function ajaxResponseSuccess(string $message = null, int $code = 200): JsonResponse
+    protected function ajaxResponseSuccess(?string $message = null, int $code = 200): JsonResponse
     {
         $this->ajaxVars['status'] = true;
         $this->ajaxVars['message'] = $message;

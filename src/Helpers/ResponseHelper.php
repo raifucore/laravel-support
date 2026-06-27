@@ -50,7 +50,7 @@ class ResponseHelper
             ->header('Content-Type', 'application/json');
     }
 
-    public static function success(?array $data = null, string|null $message = null, int|null $code = null): JsonResponse
+    public static function success(?array $data = null, ?string $message = null, ?int $code = null): JsonResponse
     {
         $code = $code ?? 200;
         $response = [

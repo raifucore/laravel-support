@@ -16,7 +16,7 @@ trait UpdateRequestDtoTrait
         return $this;
     }
 
-    public function isModified(string|UnitEnum $field = null): bool
+    public function isModified(string|UnitEnum|null $field = null): bool
     {
         return $field
             ? in_array($this->_normalize($field), $this->modified)

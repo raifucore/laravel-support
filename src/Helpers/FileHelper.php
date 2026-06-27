@@ -531,7 +531,7 @@ class FileHelper
         'video/x-sgi-movie' => 'movie',
     ];
 
-    public static function getExtensionByMimeType(string $mimeType): string|null
+    public static function getExtensionByMimeType(string $mimeType): ?string
     {
         $extension = self::$mimeTypes[$mimeType] ?? null;
 

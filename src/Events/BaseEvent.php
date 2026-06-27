@@ -10,15 +10,16 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Context;
+use RaifuCore\Support\Contracts\EventInterface;
 use RaifuCore\Support\Models\ModelField;
 
-abstract class BaseEvent
+abstract class BaseEvent implements EventInterface
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string|null $traceId;
-    public string|null $ip;
-    public User|null $author;
+    public ?string $traceId;
+    public ?string $ip;
+    public ?User $author;
     public Carbon $dateTime;
 
     /**

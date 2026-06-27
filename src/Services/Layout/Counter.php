@@ -25,7 +25,7 @@ class Counter
         return $this;
     }
 
-    public function get(string $label): int|null
+    public function get(string $label): ?int
     {
         $value = Arr::get(self::$data, $label);
 
