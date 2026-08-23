@@ -2,24 +2,26 @@
 
 namespace RaifuCore\Support\Services\Download;
 
-use Exception;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use RaifuCore\Support\Exceptions\Download\DownloadFileNotFoundException;
+use RaifuCore\Support\Exceptions\Download\DownloadWrongSecureException;
 use RaifuCore\Support\Helpers\StringHelper;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Throwable;
 
 class Download
 {
-    const KEY = '_rc_download_key_';
+    const KEY = '_rc_download_key_820d14b0-11b1-4c9f-bc3d-fd0cf85ef9b4';
 
     /**
-     * @throws Throwable
+     * @throws DownloadFileNotFoundException
      */
     public static function setFile(DownloadRequestDto $dto): void
     {
         $filepath = $dto->getPath();
 
-        if (! file_exists($filepath)) {
-            throw new Exception('File not found');
+        if (!file_exists($filepath)) {
+            throw new DownloadFileNotFoundException;
         }
 
         // Собираем итоговое имя файла
@@ -40,9 +42,6 @@ class Download
         self::_setData($normalizedDto);
     }
 
-    /**
-     * @throws Throwable
-     */
     public static function execute(): BinaryFileResponse
     {
         $dto = self::_getData();
@@ -64,7 +63,10 @@ class Download
     }
 
     /**
-     * @throws Throwable
+     * @throws DownloadWrongSecureException
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws DownloadFileNotFoundException
      */
     private static function _getData(): DownloadRequestDto
     {
@@ -86,11 +88,11 @@ class Download
             !$secure ||
             $secure !== StringHelper::arrayHash([$path, $name, (int)$delete])
         ) {
-            throw new Exception('Wrong secure');
+            throw new DownloadWrongSecureException;
         }
 
         if (!file_exists($path)) {
-            throw new Exception('File not found');
+            throw new DownloadFileNotFoundException;
         }
 
         // Возвращаем DTO обратно
