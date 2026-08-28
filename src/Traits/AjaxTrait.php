@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use RaifuCore\Support\Exceptions\AjaxRequestRequiredException;
 use Throwable;
 
 trait AjaxTrait
@@ -23,7 +24,7 @@ trait AjaxTrait
     {
         $request = $request ?? request();
         if (!$request->ajax()) {
-            throw new Exception('Ajax required');
+            throw new AjaxRequestRequiredException('Ajax required');
         }
     }
 
@@ -73,5 +74,12 @@ trait AjaxTrait
         }
 
         return $this->ajaxResponseError($shortError);
+    }
+
+    protected function ajaxResponseExceptionWithError(Throwable $e, string $error, int $code = 400): JsonResponse
+    {
+        $this->ajaxResponseException($e);
+
+        return $this->ajaxResponseError($error, $code);
     }
 }
