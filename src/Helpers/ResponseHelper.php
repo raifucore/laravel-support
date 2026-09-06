@@ -15,7 +15,7 @@ class ResponseHelper
         return self::error($e->getCode(), $e->getMessage(), $e);
     }
 
-    protected static function exceptionWithLogAndError(Throwable $e, string $error, int $code = 400): JsonResponse
+    public static function exceptionWithLogAndError(Throwable $e, string $error, int $code = 400): JsonResponse
     {
         $parts = [
             $e->getMessage() ?: get_class($e)
