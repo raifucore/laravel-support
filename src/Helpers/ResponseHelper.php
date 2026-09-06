@@ -3,6 +3,7 @@
 namespace RaifuCore\Support\Helpers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use RaifuCore\Support\Exceptions\BaseException;
 use Throwable;
@@ -12,6 +13,25 @@ class ResponseHelper
     public static function exception(Throwable $e): JsonResponse
     {
         return self::error($e->getCode(), $e->getMessage(), $e);
+    }
+
+    protected static function exceptionWithLogAndError(Throwable $e, string $error, int $code = 400): JsonResponse
+    {
+        $parts = [
+            $e->getMessage() ?: get_class($e)
+        ];
+
+        if ($e->getFile()) {
+            $parts[] = 'in ' . $e->getFile();
+        }
+
+        if ($e->getLine()) {
+            $parts[] = '(line ' . $e->getLine() . ')';
+        }
+
+        Log::error(implode(' ', $parts));
+
+        return self::error($code, $error);
     }
 
     public static function error(int|string $code, string $error, ?Throwable $ex = null): JsonResponse
